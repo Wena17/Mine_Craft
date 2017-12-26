@@ -142,7 +142,9 @@ def drawResource(y, x):
 
 #draws the player on the world
 def drawPlayer():
+  playerT.clearstamps()
   playerT.goto( (playerX * TILESIZE) + 20, height - (playerY * TILESIZE) -20 )
+  playerT.stamp()
 
 #draws the world map
 def drawWorld():
@@ -174,6 +176,7 @@ def drawInventory():
     rendererT.end_fill()
     rendererT.color('')
     #display the 'place' and 'craft' text
+    rendererT.pencolor("black")
     for i in range(1,num_rows+1):
       rendererT.goto(20, (height - (MAPHEIGHT * TILESIZE)) - 20 - (i * 100))
       rendererT.write("place")
@@ -197,7 +200,7 @@ def drawInventory():
       #add key to craft
       if crafting.get(item) != None:
         rendererT.goto(xPosition, yPostition - TILESIZE - 40)
-        rendererT.write(craftkeys[item])     
+        rendererT.write(craftkeys[item])
       #move along to place the next inventory item
       xPosition += 50
       itemNum += 1
@@ -280,12 +283,12 @@ screen.setworldcoordinates(0,0,width,height)
 screen.bgcolor(BACKGROUNDCOLOUR)
 screen.listen()
 
-#register the player image  
+#register the player image
 screen.register_shape(playerImg)
 #register each of the resource images
 for texture in textures.values():
   screen.register_shape(texture)
-  
+
 #create a new player object
 playerT = turtle.Turtle()
 playerT.hideturtle()
@@ -316,8 +319,9 @@ bindCraftingKeys()
 
 #these functions are defined above
 generateRandomWorld()
-drawWorld() 
+drawWorld()
 drawInventory()
 generateInstructions()
 drawPlayer()
-playerT.showturtle()
+#playerT.showturtle()
+screen.mainloop()
