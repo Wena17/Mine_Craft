@@ -49,6 +49,7 @@ def pickUp():
     world[playerX][playerY] = DIRT
     #draw the new DIRT tile
     drawResource(playerX, playerY)
+    drawPlayer()
     #redraw the inventory with the extra resource.
     drawInventory()
 
@@ -69,6 +70,7 @@ def place(resource):
     inventory[resource] -= 1
     #update the display (world and inventory)
     drawResource(playerX, playerY)
+    drawPlayer()
     drawInventory()
     print('   Placing', names[resource], 'complete')
   #...and if they have none left...
